@@ -1,0 +1,47 @@
+div.powercord-crypto {
+  position: relative;
+  height: 52px;
+  padding: 0 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  > img {
+    flex: 0 0 auto;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: rgba(0,0,0,0.2);
+  }
+
+  > div.info {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 100%;
+
+    > span:first-child {
+      font-size: 18px;
+      color: var(--header-primary);
+    }
+  }
+
+  > div.actions {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+div.pc-crypto-popout {
+  position: absolute;
+  bottom: 100%;
+  z-index: 100;
+}
+
+div[id*="pc-crypto-menu-"] {
+  &::before {
+    content: '';
+    background-image: attr(data-image-src url);
+  }
+}

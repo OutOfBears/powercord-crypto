@@ -1,0 +1,10 @@
+{
+  "name": "pc-crypto",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "coinbase-pro-node": "^2.13.2"
+  }
+}
