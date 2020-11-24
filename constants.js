@@ -1,9 +1,13 @@
 module.exports = Object.freeze({
-    formatCurrency: (n, p) => n.toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        maximumFractionDigits: typeof p === 'number' ? p : 2
-    }),
+    formatCurrency: (n, p) => {
+        p = typeof p === 'number' ? p : 2;
+        return n.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: p,
+            maximumFractionDigits: p
+        })
+    },
 
     calcPercentage: (oldValue, newValue) => {
         const n = Math.min(oldValue, newValue);
