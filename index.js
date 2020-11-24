@@ -70,8 +70,7 @@ module.exports = class CryptoLive extends Plugin {
     if(cryptoStore.storeLoading === true)
       cryptoStoreActions.updateCryptoLoading(false);
 
-    cryptoStoreActions.updateCryptoPrice(tickerMessage.product_id, Number(tickerMessage.price),
-      new Date(tickerMessage.time));
+    cryptoStoreActions.updateCryptoPrice(tickerMessage);
   }
 
 };

@@ -23,12 +23,10 @@ module.exports = {
     });
   },
 
-  updateCryptoPrice: (crypto, price, time) => {
+  updateCryptoPrice: (tickerMessage) => {
     FluxDispatcher.dirtyDispatch({
         type: FluxActions.UPDATE_CRYPTO_PRICE,
-        crypto,
-        price,
-        time
+        tickerMessage
     });
   }
 };

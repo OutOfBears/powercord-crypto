@@ -4,7 +4,7 @@ const { AsyncComponent, Icons: { FontAwesome } } = require('powercord/components
 
 const cryptoStore = require('../cryptoStore/store');
 const cryptoStoreActions = require('../cryptoStore/actions');
-const { formatCurrency, CRYPTO_CHANNELS } = require('../constants');
+const { formatCurrency, calcPercentage, CRYPTO_CHANNELS } = require('../constants');
 
 const PopoutMenu = require("./PopoutMenu");
 
@@ -42,7 +42,9 @@ class Modal extends React.PureComponent {
   renderNameComponent() {
     const { cryptoState, currentCrypto } = this.props;
     const currencyInfo = CRYPTO_CHANNELS[currentCrypto];
+    const prices = cryptoState.prices[currentCrypto];
 
+    const perc = calcPercentage(prices.last24Price, prices.price);
     const nameComponent = this.props.base.props.children[1].props.children({});
     delete nameComponent.props.onMouseLeave;
     delete nameComponent.props.onMouseEnter;
@@ -52,8 +54,10 @@ class Modal extends React.PureComponent {
     nameComponent.props.children[0].props.className = 'crypto-title';
     nameComponent.props.children[0].props.children.props.children = `${currencyInfo.name} (${currentCrypto})`;
     nameComponent.props.children[1] = (
-      <PanelSubtext className='crypto-price'>
-        {formatCurrency(cryptoState.prices[currentCrypto], currencyInfo.precision)}
+      <PanelSubtext className={`crypto-price ${perc.d ? 'down' : 'up'}`}>
+        {formatCurrency(prices.price, currencyInfo.precision)}
+        {(prices.price !== 0 || prices.last24Price !== 0) ?
+           ` (${perc.d ? '-' : '+'}${(perc.p * 100).toFixed(2)}%)` : ''}
       </PanelSubtext>
     );
     return nameComponent;

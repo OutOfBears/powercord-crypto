@@ -32,6 +32,15 @@ div.powercord-crypto {
     display: flex;
     flex-direction: row;
   }
+
+  div.crypto-price {
+    &.up {
+      color: rgb(123, 238, 91);
+    }
+    &.down {
+      color: rgb(249, 103, 45);
+    }
+  }
 }
 
 div.pc-crypto-popout {

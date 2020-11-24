@@ -15,67 +15,23 @@ let cryptoState = {
   loading: true,
   prices: cryptoCurrencies.reduce((a, x) => ({
     ...a,
-    [x]: 0
-  }), {}),
-  pricesOverTime: cryptoCurrencies.reduce((a, x) => ({
-    ...a,
-    [x]: [
-      {
-        span: '1m',
-        spanInMins: 1,
-        price: 0,
-        time: new Date()
-      },
-      {
-        span: '5m',
-        spanInMins: 5,
-        price: 0,
-        time: new Date()
-      },
-      {
-        span: '15m',
-        spanInMins: 15,
-        price: 0,
-        time: new Date()
-      },
-      {
-        span: '1h',
-        spanInMins: 60,
-        price: 0,
-        time: new Date()
-      },
-      {
-        span: '6h',
-        spanInMins: 60 * 6,
-        price: 0,
-        time: new Date()
-      },
-      {
-        span: '1d',
-        spanInMins: 60 * 24,
-        price: 0,
-        time: new Date()
-      },
-    ]
+    [x]: {price: 0, last24Price: 0, low24Price: 0, high24Price: 0}
   }), {})
 }
 
-function handlePriceUpdate(crypto, price, time) {
+function handlePriceUpdate(tickerMessage) {
+  console.log("update", tickerMessage);
+
+  const crypto = tickerMessage.product_id;
+
   if(cryptoCurrencies.findIndex(x => x === crypto) < 0)
     return;
 
-  cryptoState.prices[crypto] = price;
-
-  // this is not a good way of doing this, todo: refactor.
-  let pricesOverTime = cryptoState.pricesOverTime[crypto];
-  for(let i in pricesOverTime) {
-    let currentTime = new Date(time);
-    let currentSpan = pricesOverTime[i];
-    if(currentSpan === 0 || 
-      new Date(currentSpan.time.getTime() + currentSpan.spanInMins * 60000) <= currentTime) {
-      currentSpan.time = currentTime;
-      currentSpan.price = price;
-    }
+  cryptoState.prices[crypto] = {
+    price: Number(tickerMessage.price),
+    last24Price: Number(tickerMessage.open_24h),
+    low24Price: Number(tickerMessage.low_24h),
+    high24Price: Number(tickerMessage.high_24h)
   }
 }
 
@@ -121,10 +77,8 @@ class CryptoStore extends Flux.Store {
 // register with fluxx
 module.exports = new CryptoStore(FluxDispatcher, {
   [FluxActions.UPDATE_CRYPTO_PRICE]: ({
-    crypto,
-    price,
-    time
-  }) => handlePriceUpdate(crypto, price, time),
+    tickerMessage
+  }) => handlePriceUpdate(tickerMessage),
   [FluxActions.UPDATE_CRYPTO_LOADING]: ({ 
     loading
    }) => handleCryptoLoading(loading),

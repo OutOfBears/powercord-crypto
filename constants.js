@@ -5,6 +5,15 @@ module.exports = Object.freeze({
         maximumFractionDigits: typeof p === 'number' ? p : 2
     }),
 
+    calcPercentage: (oldValue, newValue) => {
+        const n = Math.min(oldValue, newValue);
+        const d = Math.max(oldValue, newValue);
+        return {
+            p: n / d,
+            d: oldValue > newValue
+        }
+    },
+
     FluxActions: {
         UPDATE_CRYPTO_LOADING: 'CRYPTO_UPDATE_CRYPTO_LOADING',
         UPDATE_CRYPTO_PRICE: 'CRYPTO_UPDATE_CRYPTO_PRICE',
