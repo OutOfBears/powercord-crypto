@@ -45,9 +45,14 @@ class PopoutMenu extends React.Component {
         <Menu.MenuItem 
           id={idx} 
           label={currency.name} 
-          subtext={formatCurrency(prices[idx])} 
-          data-image-src={currency.icon}
+          subtext={formatCurrency(prices[idx], currency.precision)}
           action={() => this.selectCrypto(idx)}
+          icon={
+            () => <svg width="18" height="18" class="pc-crypto-menu-icon"
+                xmlns="http://www.w3.org/2000/svg">       
+                <image href={currency.icon} height="18" width="18"/>
+              </svg>
+            }
         />
       );
     });

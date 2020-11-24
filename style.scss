@@ -14,6 +14,7 @@ div.powercord-crypto {
     border-radius: 50%;
     overflow: hidden;
     background: rgba(0,0,0,0.2);
+    margin-right: 8px;
   }
 
   > div.info {
@@ -37,11 +38,9 @@ div.pc-crypto-popout {
   position: absolute;
   bottom: 100%;
   z-index: 100;
-}
 
-div[id*="pc-crypto-menu-"] {
-  &::before {
-    content: '';
-    background-image: attr(data-image-src url);
+  svg.pc-crypto-menu-icon {
+    border-radius: 50%;
+    overflow: hidden;
   }
 }

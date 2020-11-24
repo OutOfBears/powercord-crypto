@@ -1,7 +1,8 @@
 module.exports = Object.freeze({
-    formatCurrency: (n) => n.toLocaleString('en-US', {
+    formatCurrency: (n, p) => n.toLocaleString('en-US', {
         style: 'currency',
         currency: 'USD',
+        maximumFractionDigits: typeof p === 'number' ? p : 2
     }),
 
     FluxActions: {
@@ -19,7 +20,8 @@ module.exports = Object.freeze({
         }, 
         "XRP-USD": {
             icon: "https://media.yiff.gg/RnfLal.png",
-            name:"Ripple"
+            name:"Ripple",
+            precision: 4
         }
     }),
     

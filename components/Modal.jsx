@@ -53,7 +53,7 @@ class Modal extends React.PureComponent {
     nameComponent.props.children[0].props.children.props.children = `${currencyInfo.name} (${currentCrypto})`;
     nameComponent.props.children[1] = (
       <PanelSubtext className='crypto-price'>
-        {formatCurrency(cryptoState.prices[currentCrypto])}
+        {formatCurrency(cryptoState.prices[currentCrypto], currencyInfo.precision)}
       </PanelSubtext>
     );
     return nameComponent;
