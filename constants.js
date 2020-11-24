@@ -10,10 +10,11 @@ module.exports = Object.freeze({
     },
 
     calcPercentage: (oldValue, newValue) => {
-        const n = Math.min(oldValue, newValue);
-        const d = Math.max(oldValue, newValue);
+        const d = oldValue > newValue;
+        const n = d ? (oldValue - newValue) : (newValue - oldValue); 
+
         return {
-            p: n / d,
+            p: n / oldValue,
             d: oldValue > newValue
         }
     },
@@ -31,6 +32,10 @@ module.exports = Object.freeze({
             icon: "https://media.yiff.gg/SlfCxb.png",
             name: "Bitcoin"
         }, 
+        "ETH-USD": {
+            icon: "https://media.yiff.gg/knVMpz.png",
+            name: "Ether",
+        },
         "XRP-USD": {
             icon: "https://media.yiff.gg/RnfLal.png",
             name:"Ripple",

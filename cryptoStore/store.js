@@ -10,7 +10,7 @@ const cryptoCurrencies = Object.keys(CRYPTO_CHANNELS);
 
 
 let currentCryptoSpan = '1m';
-let currentCrypto = cryptoCurrencies[1];
+let currentCrypto = cryptoCurrencies[cryptoCurrencies.length - 1];
 let cryptoState = {
   loading: true,
   prices: cryptoCurrencies.reduce((a, x) => ({
