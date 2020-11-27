@@ -29,15 +29,15 @@ module.exports = Object.freeze({
     CRYPTO_DEBUG: false,
     CRYPTO_CHANNELS: Object.freeze({
         "BTC-USD": {
-            icon: "https://media.yiff.gg/SlfCxb.png",
+            icon: "https://i.imgur.com/sVnriJx.png", //"icons/Bitcon.png",
             name: "Bitcoin"
         }, 
         "ETH-USD": {
-            icon: "https://media.yiff.gg/knVMpz.png",
+            icon: "https://i.imgur.com/ZrtZJ0f.png", //"icons/Ethereum.png",
             name: "Ether",
         },
         "XRP-USD": {
-            icon: "https://media.yiff.gg/RnfLal.png",
+            icon: "https://i.imgur.com/8WDy4mZ.png", //"icons/Ripple.png",
             name:"Ripple",
             precision: 4
         }

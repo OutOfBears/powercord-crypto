@@ -3,7 +3,7 @@ const { Menu } = require('powercord/components');
 
 const cryptoStore = require('../cryptoStore/store');
 const cryptoStoreActions = require('../cryptoStore/actions');
-const { formatCurrency, CRYPTO_CHANNELS } = require('../constants');
+const { formatCurrency, getIcon, CRYPTO_CHANNELS } = require('../constants');
 
 const cryptoCurrencies = Object.keys(CRYPTO_CHANNELS);
 

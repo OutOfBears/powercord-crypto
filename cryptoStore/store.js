@@ -20,8 +20,6 @@ let cryptoState = {
 }
 
 function handlePriceUpdate(tickerMessage) {
-  console.log("update", tickerMessage);
-
   const crypto = tickerMessage.product_id;
 
   if(cryptoCurrencies.findIndex(x => x === crypto) < 0)
