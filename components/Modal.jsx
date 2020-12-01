@@ -1,12 +1,14 @@
 const { React, Flux, getModuleByDisplayName, contextMenu } = require('powercord/webpack');
 const { AsyncComponent, Icons: { FontAwesome } } = require('powercord/components');
-
+const { open: openModal } = require('powercord/modal');
 
 const cryptoStore = require('../cryptoStore/store');
 const cryptoStoreActions = require('../cryptoStore/actions');
 const { formatCurrency, calcPercentage, getImgSrc, CRYPTO_CHANNELS } = require('../constants');
 
 const PopoutMenu = require("./PopoutMenu");
+const CryptoChart = require("./CryptoChart");
+
 
 // extra components
 const PanelSubtext = AsyncComponent.from(getModuleByDisplayName('PanelSubtext'));
@@ -19,6 +21,10 @@ class Modal extends React.PureComponent {
 
   showSelectMenu(e) {
     contextMenu.openContextMenu(e, () => React.createElement(ContextMenuComp))
+  }
+
+  showCryptoChart(e) {
+    openModal(() => React.createElement(CryptoChart));
   }
 
   // credit to spotify plugin, for these good render functions
@@ -71,6 +77,7 @@ class Modal extends React.PureComponent {
 
     return cryptoState.loading ? null : (
       <div className={'powercord-crypto'}>
+        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
         { popoutOpen && <PopoutMenu onClose={() => this.setState({ popoutOpen: false })} />}
 
         <img src={getImgSrc(currencyInfo.icon)} />
@@ -78,6 +85,7 @@ class Modal extends React.PureComponent {
           {this.renderNameComponent()}
         </div>
         <div class="actions">
+          {this.renderButton(() => 'View CryptoCurrency Chart', 'chart-line', () => this.showCryptoChart())}
           {this.renderButton(() => 'Select CryptoCurrency', 'chevron-up', () => this.setState({ popoutOpen: true }))}
         </div>
       </div>

@@ -2,12 +2,14 @@ const {
   Flux,
   FluxDispatcher
 } = require('powercord/webpack');
+
 const {
   FluxActions,
   CRYPTO_CHANNELS
 } = require('../constants');
-const cryptoCurrencies = Object.keys(CRYPTO_CHANNELS);
 
+
+const cryptoCurrencies = Object.keys(CRYPTO_CHANNELS);
 
 let currentCryptoSpan = '1m';
 let currentCrypto = cryptoCurrencies[cryptoCurrencies.length - 1];

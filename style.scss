@@ -53,3 +53,29 @@ div.pc-crypto-popout {
     overflow: hidden;
   }
 }
+
+div#crypto-charter {
+  max-height: 600px;
+  height: 600px;
+
+  h4#crypto-chart-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    img.chart-crypto-icon {
+      height: 30px;
+      margin-right: 10px;
+    }
+  }
+
+  div#crpyto-modal-container {
+    display: flex;
+    
+    > iframe.crypto-chart {
+      width: 100%;
+      padding: 0 0 15px 0 !important;
+      margin: 0 !important;
+    }
+  }
+}

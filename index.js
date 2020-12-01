@@ -1,4 +1,5 @@
 const { Plugin } = require('powercord/entities');
+const { get } = require('powercord/http');
 const { waitFor, getOwnerInstance, findInTree, sleep } = require('powercord/util');
 const { React, getModule, getModuleByDisplayName } = require('powercord/webpack');
 const { inject, uninject } = require('powercord/injector');
@@ -27,6 +28,7 @@ module.exports = class CryptoLive extends Plugin {
   pluginWillUnload () {
     client.ws.disconnect();
     uninject('pc-crypto-modal');
+    window.TradingView = undefined; // terrible but works ig
 
     const { container } = getModule([ 'container', 'usernameContainer' ], false);
     const accountContainer = document.querySelector(`section > .${container}`);
@@ -39,7 +41,6 @@ module.exports = class CryptoLive extends Plugin {
     this.loadStylesheet('style.scss');
     this._injectModal();
   }
-
 
   async _injectModal() {
     await sleep(1e3); // It ain't stupid if it works
