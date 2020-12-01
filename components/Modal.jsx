@@ -4,7 +4,7 @@ const { AsyncComponent, Icons: { FontAwesome } } = require('powercord/components
 
 const cryptoStore = require('../cryptoStore/store');
 const cryptoStoreActions = require('../cryptoStore/actions');
-const { formatCurrency, calcPercentage, CRYPTO_CHANNELS } = require('../constants');
+const { formatCurrency, calcPercentage, getImgSrc, CRYPTO_CHANNELS } = require('../constants');
 
 const PopoutMenu = require("./PopoutMenu");
 
@@ -73,7 +73,7 @@ class Modal extends React.PureComponent {
       <div className={'powercord-crypto'}>
         { popoutOpen && <PopoutMenu onClose={() => this.setState({ popoutOpen: false })} />}
 
-        <img src={currencyInfo.icon} />
+        <img src={getImgSrc(currencyInfo.icon)} />
         <div class="info">
           {this.renderNameComponent()}
         </div>

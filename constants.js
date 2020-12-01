@@ -1,3 +1,7 @@
+const fs = require('fs');
+const path = require('path');
+let blobCache = {};
+
 module.exports = Object.freeze({
     formatCurrency: (n, p) => {
         p = typeof p === 'number' ? p : 2;
@@ -19,6 +23,22 @@ module.exports = Object.freeze({
         }
     },
 
+    getImgSrc: (iconPath) => {
+        if(blobCache[iconPath])
+            return blobCache[iconPath];
+
+        // incase the file does not exist
+        try {
+            let newPath = path.join(__dirname, iconPath);
+            let blob = Uint8Array.from(fs.readFileSync(newPath));
+            blob = URL.createObjectURL(new Blob([blob], { type: 'image/png' }));
+            blobCache[iconPath] = blob;
+            return blob;
+        } catch {
+            return "";
+        }
+    },
+
     FluxActions: {
         UPDATE_CRYPTO_LOADING: 'CRYPTO_UPDATE_CRYPTO_LOADING',
         UPDATE_CRYPTO_PRICE: 'CRYPTO_UPDATE_CRYPTO_PRICE',
@@ -27,17 +47,18 @@ module.exports = Object.freeze({
     },
 
     CRYPTO_DEBUG: false,
+    
     CRYPTO_CHANNELS: Object.freeze({
         "BTC-USD": {
-            icon: "https://i.imgur.com/sVnriJx.png", //"icons/Bitcon.png",
+            icon: "icons/Bitcoin.png",
             name: "Bitcoin"
         }, 
         "ETH-USD": {
-            icon: "https://i.imgur.com/ZrtZJ0f.png", //"icons/Ethereum.png",
+            icon: "icons/Ethereum.png",
             name: "Ether",
         },
         "XRP-USD": {
-            icon: "https://i.imgur.com/8WDy4mZ.png", //"icons/Ripple.png",
+            icon: "icons/Ripple.png", 
             name:"Ripple",
             precision: 4
         }

@@ -3,7 +3,7 @@ const { Menu } = require('powercord/components');
 
 const cryptoStore = require('../cryptoStore/store');
 const cryptoStoreActions = require('../cryptoStore/actions');
-const { formatCurrency, getIcon, CRYPTO_CHANNELS } = require('../constants');
+const { formatCurrency, getImgSrc, CRYPTO_CHANNELS } = require('../constants');
 
 const cryptoCurrencies = Object.keys(CRYPTO_CHANNELS);
 
@@ -50,7 +50,7 @@ class PopoutMenu extends React.Component {
           icon={
             () => <svg width="18" height="18" class="pc-crypto-menu-icon"
                 xmlns="http://www.w3.org/2000/svg">       
-                <image href={currency.icon} height="18" width="18"/>
+                <image href={getImgSrc(currency.icon)} height="18" width="18"/>
               </svg>
             }
         />
